@@ -3,6 +3,7 @@ document.getElementById("loginForm").addEventListener("submit", (event) => {
 
     let emailOrPseudo = document.getElementById("emailOrPseudo").value;
     let password = document.getElementById("password").value;
+    let rememberMe = document.getElementById("rememberMe").checked;
 
     // Récupération de la liste des utilisateurs depuis le localStorage
     let users = JSON.parse(localStorage.getItem("users")) || [];
@@ -15,8 +16,12 @@ document.getElementById("loginForm").addEventListener("submit", (event) => {
     console.log("Utilisateur trouvé :", validUser);
 
     if (validUser) {
-        // Sauvegarde la session utilisateur
-        localStorage.setItem("userSession", JSON.stringify(validUser));
+        // Sauvegarde l'utilisateur selon "Se souvenir de moi"
+        if (rememberMe) {
+            localStorage.setItem("userSession", JSON.stringify(validUser)); // Stockage permanent
+        } else {
+            sessionStorage.setItem("userSession", JSON.stringify(validUser)); // Stockage temporaire
+        }
 
         // Redirige vers la page d'accueil
         window.location.href = "homepage.html";
