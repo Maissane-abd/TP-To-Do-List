@@ -31,5 +31,5 @@ document.getElementById("registerForm").addEventListener("submit", (event) => {
     console.log("Registered users:", users);
 
     // Redirige vers la page de connexion
-    window.location.href = "login.html";
+    window.location.href = "index.html";
 });
