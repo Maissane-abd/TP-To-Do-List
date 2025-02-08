@@ -5,6 +5,8 @@ document.addEventListener("DOMContentLoaded", function () {
     const addTaskBtn = document.getElementById("addTaskBtn");
     const taskList = document.getElementById("taskList");
     const logoutBtn = document.getElementById("logoutBtn");
+    const searchTask = document.getElementById("searchTask");
+    const filterStatus = document.getElementById("filterStatus");
 
     // Récupérer l'utilisateur connecté
     const currentUser = JSON.parse(localStorage.getItem("currentUser"));
@@ -19,8 +21,14 @@ document.addEventListener("DOMContentLoaded", function () {
     function loadTasks() {
         taskList.innerHTML = "";
         const tasks = JSON.parse(localStorage.getItem(`tasks_${currentUser.email}`)) || [];
+        const searchValue = searchTask.value.toLowerCase();
+        const selectedStatus = filterStatus.value;
 
         tasks.forEach((task, index) => {
+            if (
+                (selectedStatus === "all" || task.status === selectedStatus) &&
+                (task.title.toLowerCase().includes(searchValue) || task.description.toLowerCase().includes(searchValue))
+            ) {
             const li = document.createElement("li");
             li.classList.add("task-item");
             li.innerHTML = `
@@ -33,6 +41,7 @@ document.addEventListener("DOMContentLoaded", function () {
             `;
 
             taskList.appendChild(li);
+            }
         });
     }
 
@@ -95,6 +104,10 @@ document.addEventListener("DOMContentLoaded", function () {
             }
         });
     });
+
+    // Appliquer les filtres (Recherche + Statut)
+    searchTask.addEventListener("input", loadTasks);
+    filterStatus.addEventListener("change", loadTasks);
 
     // Déconnexion
     logoutBtn.addEventListener("click", function () {
