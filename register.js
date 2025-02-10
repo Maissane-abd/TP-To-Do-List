@@ -6,7 +6,7 @@ document.getElementById("registerForm").addEventListener("submit", (event) => {
     let password = document.getElementById("password").value.trim();
     let confirmPassword = document.getElementById("confirmPassword").value.trim();
 
-    if (password !== confirmPassword) {
+    if (password !== confirmPassword || pseudo === "" || email === "") {
         document.getElementById("errorMsg").style.display = "block";
         return;
     }
