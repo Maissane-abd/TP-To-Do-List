@@ -52,7 +52,7 @@ document.addEventListener("DOMContentLoaded", function () {
         const deadline = taskDeadline.value;
 
         if (title === "" || description === "" || deadline === "") {
-            alert("Veuillez remplir tous les champs !");
+            alert("Veuillez remplir tous les champs et choisir une date valide !");
             return;
         }
 

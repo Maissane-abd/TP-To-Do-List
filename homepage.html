@@ -33,5 +33,12 @@
         <button id="logoutBtn">Log out</button>
     </div>
     <script src="homepage.js"></script>
+    <script>
+        // Définir la date minimale pour l'élément date
+        document.addEventListener('DOMContentLoaded', (event) => {
+            const today = new Date().toISOString().split('T')[0];
+            document.getElementById('taskDeadline').setAttribute('min', today);
+        });
+    </script>
 </body>
 </html>
