@@ -3,12 +3,11 @@ document.getElementById("loginForm").addEventListener("submit", (event) => {
 
     let emailOrPseudo = document.getElementById("emailOrPseudo").value.trim();
     let password = document.getElementById("password").value.trim();
-    let rememberMe = document.getElementById("rememberMe").checked;
 
-    // Récupérer la liste des utilisateurs
+    // Get the users from the local storage
     let users = JSON.parse(localStorage.getItem("users")) || [];
 
-    // Vérifier si l'utilisateur existe
+    // Check if the user exists
     let validUser = users.find(user => 
         (user.email === emailOrPseudo || user.pseudo === emailOrPseudo) && user.password === password
     );

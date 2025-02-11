@@ -8,16 +8,16 @@ document.addEventListener("DOMContentLoaded", function () {
     const searchTask = document.getElementById("searchTask");
     const filterStatus = document.getElementById("filterStatus");
 
-    // Récupérer l'utilisateur connecté
+    // Retrieve the logged-in user
     const currentUser = JSON.parse(localStorage.getItem("currentUser"));
 
     if (!currentUser) {
         window.location.href = "index.html"; 
     }
 
-    loadTasks(); // Charger les tâches à l'affichage
+    loadTasks(); // Load tasks on display
 
-    // Charger et afficher les tâches de l'utilisateur
+    // Load and display the user's tasks
     function loadTasks() {
         taskList.innerHTML = "";
         const tasks = JSON.parse(localStorage.getItem(`tasks_${currentUser.email}`)) || [];
@@ -35,9 +35,9 @@ document.addEventListener("DOMContentLoaded", function () {
                 <strong class="task-title">${task.title}</strong>
                 <span class="task-desc">${task.description}</span>
                 <span class="task-deadline">📅 ${task.deadline}</span>
-                <span class="task-status ${task.status === "Terminée" ? "completed" : "pending"}">${task.status}</span>
-                ${task.status === "En cours" ? `<button class="complete-btn" data-index="${index}">✅ Terminer</button>` : ""}
-                ${task.status === "En cours" ? `<button class="delete-btn" data-index="${index}">🗑️ Supprimer</button>` : ""}
+                <span class="task-status ${task.status === "Completed" ? "completed" : "pending"}">${task.status === "Completed" ? "Completed" : "In Progress"}</span>
+                ${task.status === "In Progress" ? `<button class="complete-btn" data-index="${index}">✅ Complete</button>` : ""}
+                ${task.status === "In Progress" ? `<button class="delete-btn" data-index="${index}">🗑️ Delete</button>` : ""}
             `;
 
             taskList.appendChild(li);
@@ -45,31 +45,31 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     }
 
-    // Ajouter une nouvelle tâche (Statut = "En cours" par défaut)
+    // Add a new task (Status = "In Progress" by default)
     addTaskBtn.addEventListener("click", function () {
         const title = taskTitle.value.trim();
         const description = taskDescription.value.trim();
         const deadline = taskDeadline.value;
 
         if (title === "" || description === "" || deadline === "") {
-            alert("Veuillez remplir tous les champs et choisir une date valide !");
+            alert("Please fill in all fields and choose a valid date!");
             return;
         }
 
-        const newTask = { title, description, deadline, status: "En cours" };
+        const newTask = { title, description, deadline, status: "In Progress" };
         const tasks = JSON.parse(localStorage.getItem(`tasks_${currentUser.email}`)) || [];
         tasks.push(newTask);
         localStorage.setItem(`tasks_${currentUser.email}`, JSON.stringify(tasks));
 
-        loadTasks(); // 🔄 Mise à jour de l'affichage
+        loadTasks(); // 🔄 Refresh display
 
-        // Réinitialiser les champs
+        // Reset fields
         taskTitle.value = "";
         taskDescription.value = "";
         taskDeadline.value = "";
     });
 
-    // Gestion des actions sur les tâches (Terminer/Supprimer)
+    // Manage task actions (Complete/Delete)
     taskList.addEventListener("click", function (event) {
         let tasks = JSON.parse(localStorage.getItem(`tasks_${currentUser.email}`)) || [];
 
@@ -82,13 +82,13 @@ document.addEventListener("DOMContentLoaded", function () {
 
         if (event.target.classList.contains("complete-btn")) {
             const index = event.target.dataset.index;
-            tasks[index].status = "Terminée";
+            tasks[index].status = "Completed";
             localStorage.setItem(`tasks_${currentUser.email}`, JSON.stringify(tasks));
             loadTasks(); 
         }
     });
 
-    // Fonction de recherche
+    // Search function
     document.getElementById("searchTask").addEventListener("input", function () {
         let searchValue = this.value.toLowerCase();
         let tasks = document.querySelectorAll(".task-item");
@@ -105,16 +105,16 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     });
 
-    // Appliquer les filtres (Recherche + Statut)
+    // Apply filters (Search + Status)
     searchTask.addEventListener("input", loadTasks);
     filterStatus.addEventListener("change", loadTasks);
 
-    // Déconnexion
+    // Logout
     logoutBtn.addEventListener("click", function () {
         localStorage.removeItem("currentUser");
         window.location.href = "index.html";
     });
 
-    // Chargement initial
+    // Initial loading
     loadTasks();
 });

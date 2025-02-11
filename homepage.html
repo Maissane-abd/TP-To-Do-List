@@ -10,22 +10,21 @@
     <div class="container">
         <h1>To-Do List</h1>
         <p id="currentUserDisplay"></p>
-        <!-- Barre de recherche + Filtre -->
         <div class="search-filter">
-            <input type="text" id="searchTask" placeholder="🔍 Rechercher une tâche...">
+            <input type="text" id="searchTask" placeholder="🔍 Search for a task...">
             <select id="filterStatus">
-                <option value="all">Tous</option>
-                <option value="En cours">En cours</option>
-                <option value="Terminée">Terminée</option>
+                <option value="all">All</option>
+                <option value="In Progress">In Progress</option>
+                <option value="Completed">Completed</option>
             </select>
         </div>
         <div class="todo-container">
-            <input type="text" id="taskTitle" placeholder="Titre de la tâche" required>
+            <input type="text" id="taskTitle" placeholder="Task title" required>
             <textarea id="taskDescription" placeholder="Description" required></textarea>
             <input type="date" id="taskDeadline" required>
             <select id="taskStatus">
-                <option value="En cours">Doing</option>
-                <option value="Terminée">Done</option>
+                <option value="In Progress">In progress</option>
+                <option value="Completed">Completed</option>
             </select>
             <button id="addTaskBtn">Add</button>
         </div>
@@ -34,7 +33,7 @@
     </div>
     <script src="homepage.js"></script>
     <script>
-        // Définir la date minimale pour l'élément date
+        // Set the minimum date for the date input
         document.addEventListener('DOMContentLoaded', (event) => {
             const today = new Date().toISOString().split('T')[0];
             document.getElementById('taskDeadline').setAttribute('min', today);

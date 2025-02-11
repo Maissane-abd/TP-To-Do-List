@@ -11,25 +11,25 @@ document.getElementById("registerForm").addEventListener("submit", (event) => {
         return;
     }
 
-    // Récupérer les utilisateurs existants
+    // Get the users from the local storage
     let users = JSON.parse(localStorage.getItem("users")) || [];
 
-    // Vérifier si l'email ou le pseudo est déjà utilisé
+    // check if the user or email already exists
     let userExists = users.some(user => user.email === email || user.pseudo === pseudo);
     if (userExists) {
-        alert("Cet email ou ce pseudo est déjà utilisé. Veuillez en choisir un autre.");
+        alert("This email or pseudo already exits, Choose another one please.");
         return;
     }
 
-    // Création d'un identifiant unique
+    // create the new user object
     let newUser = { id: Date.now(), email, pseudo, password };
     users.push(newUser);
     
-    // Sauvegarder la liste mise à jour des utilisateurs
+    // save the new user in the local storage
     localStorage.setItem("users", JSON.stringify(users));
 
-    console.log("Utilisateur enregistré :", newUser);
+    console.log("User save :", newUser);
 
-    // Redirige vers la page de connexion
+    // redirect to the login page
     window.location.href = "index.html";
 });
