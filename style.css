@@ -1,14 +1,156 @@
+/* Import Google Font */
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Roboto', Arial, sans-serif;
+}
+
+body {
+    background: #141414;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    color: white;
+    padding: 1rem;
+}
+
+.container {
+    background: rgba(0, 0, 0, 0.8);
+    padding: 2.5rem;
+    border-radius: 0.5rem;
+    width: 95%;
+    max-width: 50rem;
+    text-align: center;
+    box-shadow: 0 0 0.9375rem rgba(255, 0, 0, 0.5);
+}
+
+h1 {
+    font-size: 2rem;
+    font-weight: 700;
+    color: #e50914;
+    margin-bottom: 1.25rem;
+}
+
+form div {
+    margin-bottom: 0.9375rem;
+    text-align: left;
+}
+
 label {
     display: block;
-  }
-  
-  input[type='submit'],
-  label {
-    margin-top: 1rem;
-  }
+    font-size: 0.875rem;
+    margin-bottom: 0.3125rem;
+}
 
-  .errorMsg {
-    color: red;
+input, textarea, select {
+    width: 100%;
+    padding: 0.625rem;
+    border: none;
+    border-radius: 0.3125rem;
+    font-size: 1rem;
+    background: #333;
+    color: white;
+}
+
+button {
+    width: auto;
+    padding: 0.5rem 1rem;
+    background: #e50914;
+    border: none;
+    color: white;
+    font-size: 1rem;
+    font-weight: bold;
+    border-radius: 0.3125rem;
+    cursor: pointer;
+    transition: background 0.3s;
+    margin-left: 0.5rem;
+}
+
+button:hover {
+    background: #b20710;
+}
+
+.errorMsg {
+    color: #ff4c4c;
+    font-size: 0.875rem;
     display: none;
-  }
-  
+    margin-top: 0.625rem;
+}
+
+p {
+    margin-top: 1.25rem;
+    font-size: 0.875rem;
+}
+
+a {
+    color: #e50914;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+.search-filter {
+    display: flex;
+    gap: 0.625rem;
+    margin-bottom: 0.625rem;
+}
+
+.todo-container input, .todo-container textarea, .todo-container select {
+    width: 100%;
+    padding: 0.625rem;
+    margin: 0.3125rem 0;
+    border-radius: 0.3125rem;
+    border: none;
+}
+
+ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+li {
+    background: #222;
+    margin: 0.3125rem 0;
+    padding: 1.25rem;
+    border-radius: 0.3125rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+li button {
+    flex-shrink: 0;
+    padding: 0.5rem 1rem;
+    font-size: 1rem;
+}
+
+#logoutBtn {
+    margin-top: 0.625rem;
+    background: #333;
+}
+
+/* Responsive Design */
+@media (max-width: 50rem) {
+    .container {
+        width: 100%;
+        padding: 1.5rem;
+    }
+
+    h1 {
+        font-size: 1.75rem;
+    }
+
+    input, button {
+        font-size: 0.9375rem;
+    }
+}
+
